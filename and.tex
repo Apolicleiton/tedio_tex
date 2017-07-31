@@ -1,0 +1,36 @@
+\newcount\andVariable
+\newcount\orVariable
+
+\def\and#1#2{%
+	\andVariable=0
+	\ifnum#1 %
+		\ifnum#2 %
+			\andVariable=1
+		\fi
+	\fi
+}
+
+\def\or#1#2{%
+	\orVariable=1
+	\ifnum#1 %
+	\else
+		\ifnum#2 %
+		\else
+			\orVariable=0
+		\fi
+	\fi	
+}
+
+\newcount\xx
+\xx=1
+\newcount\yy
+\yy=2
+\and{\xx>1}{\yy>2}
+\number\andVariable
+
+\or{\xx>1}{\yy>2}
+\number\orVariable
+
+\Hex{21}
+
+\end
