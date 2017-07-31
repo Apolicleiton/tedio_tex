@@ -1,0 +1,54 @@
+\newcount\aResto\relax
+\newcount\bResto\relax
+\newcount\resto\relax
+\def\calculaResto#1#2{%
+    \aResto=#1%
+    \bResto=#2%
+    \resto=#1%
+    \divide\aResto by \bResto%
+    \multiply\bResto by \aResto%
+    \advance\resto by -\bResto%
+}
+
+\newcount\iPrimo
+\newcount\produto
+\newcount\primo
+\def\ehPrimo#1{%
+    \iPrimo=3
+    \produto=\iPrimo
+    \primo=1
+    \multiply\produto by \produto
+    \advance\produto by -1
+    \loop\ifnum\produto<#1 %
+        \calculaResto{#1}{\iPrimo}
+        \ifnum\resto=0 %
+            \primo=-1
+            \produto=#1
+        \fi
+        \advance\iPrimo by 2
+        \produto=\iPrimo
+        \multiply\produto by \produto
+        \advance\produto by -1
+    \repeat
+}
+\primo=1
+\newcount\iListaPrimo
+\def\listaPrimo#1#2{%
+    \iListaPrimo=#1\relax
+    \loop\ifnum\iListaPrimo<#2 %
+        {\ehPrimo\iListaPrimo
+        \ifnum\primo>0 %
+            \number\iListaPrimo\vskip\parskip
+        \fi}
+        \advance\iListaPrimo by 2
+    \repeat
+}
+
+\listaPrimo{3}{100}
+
+\ehPrimo{15}
+\number\primo\par
+
+\ehPrimo{17}
+\number\primo
+
