@@ -1,0 +1,39 @@
+\input _resto
+%\input _andor
+
+\newcount\iContador
+\newcount\ehMltiplo
+
+\def\ehMultiplo#1#2{%
+	\calculaResto{#1}{#2}
+	\ifnum\resto=0 %
+		\ehMultiplo=1
+	\fi
+}
+
+\newcount\soma
+\newcount\restoA
+\newcount\restoB
+
+\def\somaMultiplo#1#2{
+	\iContador=#1%
+	\loop\ifnum\iContador<#2%
+		\calculaResto{\iContador}{3}
+		\restoA=\resto%
+		\ifnum\restoA>0 %
+			\calculaResto{\iContador}{5}
+			\restoB=\resto%
+			\ifnum\restoB=0 %
+				%\message{\number\iContador}
+				\advance\soma by \iContador
+			\fi
+		\else
+			%\message{\number\iContador}
+			\advance\soma by \iContador
+		\fi
+		\advance\iContador by 1
+	\repeat
+}
+
+\somaMultiplo{1}{4000000}
+\number\soma
